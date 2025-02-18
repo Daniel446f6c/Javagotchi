@@ -5,42 +5,6 @@ import java.util.Scanner;
 
 public class Javagotchi {
 
-    private enum HungerLevel {
-        MIN(0),
-        LOW(5),
-        MEDIUM(10),
-        HIGH(18),
-        MAX(20);
-
-        private final int num;
-
-        HungerLevel(int num) {
-            this.num = num;
-        }
-
-        public int getValue() {
-            return num;
-        }
-    }
-
-    private enum Tiredness {
-        MIN(0),
-        LOW(5),
-        MEDIUM(10),
-        HIGH(18),
-        MAX(20);
-
-        private final int num;
-
-        Tiredness(int num) {
-            this.num = num;
-        }
-
-        public int getValue() {
-            return num;
-        }
-    }
-
     private final Random RANDOM = new Random();
     private final Scanner USER_INPUT = new Scanner(System.in);
     private final String BODY_WITH_MENU = "\n" +
@@ -109,6 +73,42 @@ public class Javagotchi {
             }
             if (shortSleepAfter) { Thread.sleep(1000); }
         } catch (InterruptedException ignored) {}
+    }
+
+    public enum HungerLevel {
+        MIN(0),
+        LOW(5),
+        MEDIUM(10),
+        HIGH(18),
+        MAX(20);
+
+        private final int num;
+
+        HungerLevel(int num) {
+            this.num = num;
+        }
+
+        public int getValue() {
+            return num;
+        }
+    }
+
+    public enum Tiredness {
+        MIN(0),
+        LOW(5),
+        MEDIUM(10),
+        HIGH(18),
+        MAX(20);
+
+        private final int num;
+
+        Tiredness(int num) {
+            this.num = num;
+        }
+
+        public int getValue() {
+            return num;
+        }
     }
 
     public int getAge() {
