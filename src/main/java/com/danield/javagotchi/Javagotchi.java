@@ -113,37 +113,42 @@ public class Javagotchi {
     }
 
     private void guessTheColor() {
-        String[] colors = {"Red", "Green", "Blue", "Yellow", "Orange", "Magenta", "Cyan"};
+        ArrayList<AnsiColor> colors = new ArrayList<>();
+        for (AnsiColor color : AnsiColor.values()) {
+            if (color == AnsiColor.RESET) { continue; }
+            colors.add(color);
+        }
 
         StringBuilder colorString = new StringBuilder();
-        for (String color : colors) {
-            colorString.append(color).append("  ");
+        for (AnsiColor color : colors) {
+            colorString.append("%s%s%s  ".formatted(color.getCode(), color.getName(), AnsiColor.RESET.getCode()));
         }
 
         animateOutput("""
                 Yeah! Let's play something...
                 
-                We will play "Guess the color" :3
+                We will play "Guess The Color" :3
                 %s
                 I hope you guess it! *happy*
                 
                 Give it a shot:\s""".formatted(colorString), 20, false);
 
-        int javagotchisChoice = RANDOM.nextInt(0, colors.length);
+        int javagotchisChoice = RANDOM.nextInt(0, colors.size());
 
         String usersGuess;
         do {
             usersGuess = USER_INPUT.nextLine();
         } while(usersGuess.isEmpty());
 
-        if (colors[javagotchisChoice].equalsIgnoreCase(usersGuess)) {
+        if (colors.get(javagotchisChoice).getName().equalsIgnoreCase(usersGuess)) {
             int coinsEarned = RANDOM.nextInt(5, 21);
             coins += coinsEarned;
             animateOutput("\n* * * * * CONGRATS!!! * * * * *\n", 20, true);
             animateOutput("You've just earned %s coins!".formatted(coinsEarned), 20, true);
         }
         else {
-            animateOutput("Oh no! Sadly, it was %s !\n".formatted(colors[javagotchisChoice]), 20, true);
+            animateOutput("Oh no! Sadly, it was %s%s%s\n".formatted(colors.get(javagotchisChoice).getCode(),
+                    colors.get(javagotchisChoice).getName(), AnsiColor.RESET.getCode()), 20, true);
             animateOutput("Good luck next time! :3", 20, true);
         }
     }
