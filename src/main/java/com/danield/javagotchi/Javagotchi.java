@@ -326,13 +326,26 @@ public class Javagotchi {
             return;
         }
 
-        for (int i = 0; i < 3; i++) {
-            animateOutput("*munch* ", 20, true);
+        int rndNum;
+        if (hungerLevel < HungerLevel.LOW.getValue()) {
+            rndNum = RANDOM.nextInt(1, hungerLevel);
+        }
+        else if (hungerLevel < HungerLevel.MEDIUM.getValue()) {
+            rndNum = RANDOM.nextInt(2, 5);
+        }
+        else if (hungerLevel < HungerLevel.HIGH.getValue()) {
+            rndNum = RANDOM.nextInt(3, 7);
+        }
+        else {
+            rndNum = RANDOM.nextInt(8, 14);
         }
 
+        for (int i = 0; i < rndNum; i++) {
+            animateOutput("*munch* ", 20, true);
+            hungerLevel--;
+        }
         animateOutput("\n\nYUMMY YUMMY YUMMY!! :3", 20 ,true);
 
-        hungerLevel--;
         hasEaten = true;
     }
 
