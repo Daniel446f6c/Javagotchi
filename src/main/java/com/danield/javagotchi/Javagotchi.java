@@ -1,7 +1,6 @@
 package com.danield.javagotchi;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -219,10 +218,6 @@ public class Javagotchi {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setHungerLevel(int hungerLevel) {
