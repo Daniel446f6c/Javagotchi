@@ -49,14 +49,14 @@ public class Game {
             for (AnsiColor color : AnsiColor.values()) {
                 if (color.equals(AnsiColor.RESET)) continue;
                 clearConsole();
-                System.out.print(color.getValue() + SPLASH_IMAGE);
+                System.out.print(color.getCode() + SPLASH_IMAGE);
                 try {
                     Thread.sleep(120);
                 } catch (InterruptedException ignored) {}
             }
         }
 
-        System.out.print(AnsiColor.RESET.getValue());
+        System.out.print(AnsiColor.RESET.getCode());
         clearConsole();
     }
 
@@ -114,33 +114,33 @@ public class Game {
     private static void beginOfRound() {
         StringBuilder header = new StringBuilder();
         header.append("************************************* %sRound %s%s *************************************\n".formatted(
-                      AnsiColor.CYAN.getValue(), rounds, AnsiColor.RESET.getValue()));
-        header.append("### %sName: %s%s ###".formatted(AnsiColor.CYAN.getValue(), JAVAGOTCHI.getName(), AnsiColor.RESET.getValue()));
-        header.append(" %sAge: %s%s ###".formatted(AnsiColor.CYAN.getValue(), JAVAGOTCHI.getAge(), AnsiColor.RESET.getValue()));
+                      AnsiColor.CYAN.getCode(), rounds, AnsiColor.RESET.getCode()));
+        header.append("### %sName: %s%s ###".formatted(AnsiColor.CYAN.getCode(), JAVAGOTCHI.getName(), AnsiColor.RESET.getCode()));
+        header.append(" %sAge: %s%s ###".formatted(AnsiColor.CYAN.getCode(), JAVAGOTCHI.getAge(), AnsiColor.RESET.getCode()));
 
         int hungerLevel = JAVAGOTCHI.getHungerLevel();
         if (hungerLevel >= Javagotchi.HungerLevel.HIGH.getValue()) {
-            header.append(" %sHunger%s ###".formatted(AnsiColor.RED.getValue(), AnsiColor.RESET.getValue()));
+            header.append(" %sHunger%s ###".formatted(AnsiColor.RED.getCode(), AnsiColor.RESET.getCode()));
         }
         else if (hungerLevel >= Javagotchi.HungerLevel.MEDIUM.getValue()) {
-            header.append(" %sHunger%s ###".formatted(AnsiColor.YELLOW.getValue(), AnsiColor.RESET.getValue()));
+            header.append(" %sHunger%s ###".formatted(AnsiColor.YELLOW.getCode(), AnsiColor.RESET.getCode()));
         }
         else {
-            header.append(" %sHunger%s ###".formatted(AnsiColor.GREEN.getValue(), AnsiColor.RESET.getValue()));
+            header.append(" %sHunger%s ###".formatted(AnsiColor.GREEN.getCode(), AnsiColor.RESET.getCode()));
         }
 
         int tiredness = JAVAGOTCHI.getTiredness();
         if (tiredness >= Javagotchi.Tiredness.HIGH.getValue()) {
-            header.append(" %sTiredness%s ###".formatted(AnsiColor.RED.getValue(), AnsiColor.RESET.getValue()));
+            header.append(" %sTiredness%s ###".formatted(AnsiColor.RED.getCode(), AnsiColor.RESET.getCode()));
         }
         else if (tiredness >= Javagotchi.Tiredness.MEDIUM.getValue()) {
-            header.append(" %sTiredness%s ###".formatted(AnsiColor.YELLOW.getValue(), AnsiColor.RESET.getValue()));
+            header.append(" %sTiredness%s ###".formatted(AnsiColor.YELLOW.getCode(), AnsiColor.RESET.getCode()));
         }
         else {
-            header.append(" %sTiredness%s ###".formatted(AnsiColor.GREEN.getValue(), AnsiColor.RESET.getValue()));
+            header.append(" %sTiredness%s ###".formatted(AnsiColor.GREEN.getCode(), AnsiColor.RESET.getCode()));
         }
 
-        header.append(" %sCoins: %s%s ###\n".formatted(AnsiColor.CYAN.getValue(), JAVAGOTCHI.getCoins(), AnsiColor.RESET.getValue()));
+        header.append(" %sCoins: %s%s ###\n".formatted(AnsiColor.CYAN.getCode(), JAVAGOTCHI.getCoins(), AnsiColor.RESET.getCode()));
 
         System.out.println(header);
         JAVAGOTCHI.printBodyWithMenu();
