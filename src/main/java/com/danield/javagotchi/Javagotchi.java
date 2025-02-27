@@ -1,5 +1,7 @@
 package com.danield.javagotchi;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -73,6 +75,77 @@ public class Javagotchi {
             }
             if (shortSleepAfter) { Thread.sleep(1000); }
         } catch (InterruptedException ignored) {}
+    }
+
+    private void headsOrTails() {
+        int javagotchisChoice = RANDOM.nextInt(0, 2);
+
+        animateOutput("""
+                Yeah! Let's play something...
+                
+                We will play "Heads(0) or Tails(1)" :3
+                and I've already made a choice!
+                I hope you guess it! *happy*
+                
+                Give it a shot:\s""", 20, false);
+
+        while (!USER_INPUT.hasNextInt()) {
+            USER_INPUT.next(); // IMPORTANT! Flush input stream. Breaks program if removed.
+            animateOutput("Ups! That's not an number. Try again: ", 20, false);
+        }
+        int usersGuess = USER_INPUT.nextInt();
+
+        if (javagotchisChoice == usersGuess) {
+            int coinsEarned = RANDOM.nextInt(1, 11);
+            coins += coinsEarned;
+            animateOutput("\n* * * * * CONGRATS!!! * * * * *\n", 20, true);
+            animateOutput("You've just earned %s coins!".formatted(coinsEarned), 20, true);
+        }
+        else {
+            if (javagotchisChoice == 0) {
+                animateOutput("\nOh no! Sadly, it was Heads...\n", 20, true);
+            }
+            else {
+                animateOutput("\nOh no! Sadly, it was Tails...\n", 20, true);
+            }
+            animateOutput("I bet you guess it next time! :3", 20, true);
+        }
+    }
+
+    private void guessTheColor() {
+        String[] colors = {"Red", "Green", "Blue", "Yellow", "Orange", "Magenta", "Cyan"};
+
+        StringBuilder colorString = new StringBuilder();
+        for (String color : colors) {
+            colorString.append(color).append("  ");
+        }
+
+        animateOutput("""
+                Yeah! Let's play something...
+                
+                We will play "Guess the color" :3
+                %s
+                I hope you guess it! *happy*
+                
+                Give it a shot:\s""".formatted(colorString), 20, false);
+
+        int javagotchisChoice = RANDOM.nextInt(0, colors.length);
+
+        String usersGuess;
+        do {
+            usersGuess = USER_INPUT.nextLine();
+        } while(usersGuess.isEmpty());
+
+        if (colors[javagotchisChoice].equalsIgnoreCase(usersGuess)) {
+            int coinsEarned = RANDOM.nextInt(5, 21);
+            coins += coinsEarned;
+            animateOutput("\n* * * * * CONGRATS!!! * * * * *\n", 20, true);
+            animateOutput("You've just earned %s coins!".formatted(coinsEarned), 20, true);
+        }
+        else {
+            animateOutput("Oh no! Sadly, it was %s !\n".formatted(colors[javagotchisChoice]), 20, true);
+            animateOutput("Good luck next time! :3", 20, true);
+        }
     }
 
     public enum HungerLevel {
@@ -191,39 +264,12 @@ public class Javagotchi {
     }
 
     public void playGames() {
-        int javagotchisChoice = RANDOM.nextInt(0, 2);
-
-        animateOutput("""
-                Yeah! Let's play something...
-                
-                We will play "Heads(0) or Tails(1)" :3
-                and I've already made a choice!
-                I hope you guess it! *happy*
-                
-                Give it a shot:\s""", 20, false);
-
-        while (!USER_INPUT.hasNextInt()) {
-            USER_INPUT.next(); // IMPORTANT! Flush input stream. Breaks program if removed.
-            animateOutput("Ups! That's not an number. Try again: ", 20, false);
-        }
-        int usersGuess = USER_INPUT.nextInt();
-
-        if (javagotchisChoice == usersGuess) {
-            int coinsEarned = RANDOM.nextInt(1, 11);
-            coins += coinsEarned;
-            animateOutput("\n* * * * * CONGRATS!!! * * * * *\n", 20, true);
-            animateOutput("You've just earned %s coins!".formatted(coinsEarned), 20, true);
+        if (RANDOM.nextInt(1, 11) <= 5) {
+            headsOrTails();
         }
         else {
-            if (javagotchisChoice == 0) {
-                animateOutput("\nOh no! Sadly, it was Heads...\n", 20, true);
-            }
-            else {
-                animateOutput("\nOh no! Sadly, it was Tails...\n", 20, true);
-            }
-            animateOutput("I bet you guess it next time! :3", 20, true);
+            guessTheColor();
         }
-
         tiredness++;
     }
 
