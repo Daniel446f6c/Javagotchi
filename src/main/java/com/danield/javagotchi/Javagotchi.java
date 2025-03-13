@@ -316,7 +316,7 @@ public class Javagotchi {
     }
 
     public void feed() {
-        if (hungerLevel <= HungerLevel.MIN.getValue()) {
+        if (hungerLevel <= HungerLevel.MIN.getValue()+1) {
             animateOutput("I'm not hungry right now! :3", 20, true);
             return;
         }
