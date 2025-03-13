@@ -6,7 +6,7 @@
 
     <groupId>com.danield</groupId>
     <artifactId>Javagotchi</artifactId>
-    <version>0.1.0.0</version>
+    <version>0.2.0.0</version>
     <name>Javagotchi</name>
     <packaging>jar</packaging>
     <inceptionYear>2025</inceptionYear> <!-- required by launch4j -->
