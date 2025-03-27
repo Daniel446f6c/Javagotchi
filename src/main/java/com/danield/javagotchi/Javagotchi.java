@@ -64,22 +64,10 @@ public class Javagotchi {
     private boolean hasEaten = false;
     private boolean hasSlept = false;
 
-    private void animateOutput(String message, int millis, boolean shortSleepAfter) {
-        if (millis < 0) throw new IllegalArgumentException("millis must be positive");
-        if (message.isEmpty()) throw new IllegalArgumentException("message must not be empty");
-        try {
-            for (int i = 0; i < message.length(); i++) {
-                Thread.sleep(millis);
-                System.out.print(message.charAt(i));
-            }
-            if (shortSleepAfter) { Thread.sleep(1000); }
-        } catch (InterruptedException ignored) {}
-    }
-
     private void headsOrTails() {
         int javagotchisChoice = RANDOM.nextInt(0, 2);
 
-        animateOutput("""
+        GameUtils.animateOutput("""
                 Yeah! Let's play something...
                 
                 We will play "Heads(0) or Tails(1)" :3
@@ -90,24 +78,24 @@ public class Javagotchi {
 
         while (!USER_INPUT.hasNextInt()) {
             USER_INPUT.next(); // IMPORTANT! Flush input stream. Breaks program if removed.
-            animateOutput("Ups! That's not an number. Try again: ", 20, false);
+            GameUtils.animateOutput("Ups! That's not an number. Try again: ", 20, false);
         }
         int usersGuess = USER_INPUT.nextInt();
 
         if (javagotchisChoice == usersGuess) {
             int coinsEarned = RANDOM.nextInt(1, 11);
             coins += coinsEarned;
-            animateOutput("\n* * * * * CONGRATS!!! * * * * *\n", 20, true);
-            animateOutput("You've just earned %s coins!".formatted(coinsEarned), 20, true);
+            GameUtils.animateOutput("\n* * * * * CONGRATS!!! * * * * *\n", 20, true);
+            GameUtils.animateOutput("You've just earned %s coins!".formatted(coinsEarned), 20, true);
         }
         else {
             if (javagotchisChoice == 0) {
-                animateOutput("\nOh no! Sadly, it was Heads...\n", 20, true);
+                GameUtils.animateOutput("\nOh no! Sadly, it was Heads...\n", 20, true);
             }
             else {
-                animateOutput("\nOh no! Sadly, it was Tails...\n", 20, true);
+                GameUtils.animateOutput("\nOh no! Sadly, it was Tails...\n", 20, true);
             }
-            animateOutput("I bet you guess it next time! :3", 20, true);
+            GameUtils.animateOutput("I bet you guess it next time! :3", 20, true);
         }
     }
 
@@ -123,7 +111,7 @@ public class Javagotchi {
             colorString.append("%s%s%s  ".formatted(color.getCode(), color.getName(), AnsiColor.RESET.getCode()));
         }
 
-        animateOutput("""
+        GameUtils.animateOutput("""
                 Yeah! Let's play something...
                 
                 We will play "Guess The Color" :3
@@ -142,49 +130,13 @@ public class Javagotchi {
         if (colors.get(javagotchisChoice).getName().equalsIgnoreCase(usersGuess)) {
             int coinsEarned = RANDOM.nextInt(5, 21);
             coins += coinsEarned;
-            animateOutput("\n* * * * * CONGRATS!!! * * * * *\n", 20, true);
-            animateOutput("You've just earned %s coins!".formatted(coinsEarned), 20, true);
+            GameUtils.animateOutput("\n* * * * * CONGRATS!!! * * * * *\n", 20, true);
+            GameUtils.animateOutput("You've just earned %s coins!".formatted(coinsEarned), 20, true);
         }
         else {
-            animateOutput("Oh no! Sadly, it was %s%s%s\n".formatted(colors.get(javagotchisChoice).getCode(),
+            GameUtils.animateOutput("Oh no! Sadly, it was %s%s%s\n".formatted(colors.get(javagotchisChoice).getCode(),
                     colors.get(javagotchisChoice).getName(), AnsiColor.RESET.getCode()), 20, true);
-            animateOutput("Good luck next time! :3", 20, true);
-        }
-    }
-
-    public enum HungerLevel {
-        MIN(0),
-        LOW(5),
-        MEDIUM(10),
-        HIGH(18),
-        MAX(20);
-
-        private final int num;
-
-        HungerLevel(int num) {
-            this.num = num;
-        }
-
-        public int getValue() {
-            return num;
-        }
-    }
-
-    public enum Tiredness {
-        MIN(0),
-        LOW(5),
-        MEDIUM(10),
-        HIGH(18),
-        MAX(20);
-
-        private final int num;
-
-        Tiredness(int num) {
-            this.num = num;
-        }
-
-        public int getValue() {
-            return num;
+            GameUtils.animateOutput("Good luck next time! :3", 20, true);
         }
     }
 
@@ -204,11 +156,11 @@ public class Javagotchi {
         return tiredness;
     }
 
-    public boolean getHasEaten() {
+    public boolean hasEaten() {
         return hasEaten;
     }
 
-    public boolean getHasSlept() {
+    public boolean hasSlept() {
         return hasSlept;
     }
 
@@ -245,7 +197,7 @@ public class Javagotchi {
     }
 
     public void greetings() {
-        animateOutput("Hello my friend! I am %s and %s years old. :3".formatted(name, age), 20, true);
+        GameUtils.animateOutput("Hello my friend! I am %s and %s years old. :3".formatted(name, age), 20, true);
     }
 
     public void printBodyWithMenu() {
@@ -278,27 +230,27 @@ public class Javagotchi {
         int numberHigh = RANDOM.nextInt(51, 101);
         int javagotchisNumber = RANDOM.nextInt(numberLow, numberHigh+1);
 
-        animateOutput("Uhh you seem to love the risk! Let's see how it goes...\n\n" +
-                          "We will play \"Guess the number\" :3\n" +
-                          "and I already chose one between %s and %s !\n".formatted(numberLow, numberHigh) +
-                          "I dare your guess it right! *grrr*\n\n" +
-                          "Give it a shot: ", 20, false);
+        GameUtils.animateOutput("Uhh you seem to love the risk! Let's see how it goes...\n\n" +
+                                        "We will play \"Guess the number\" :3\n" +
+                                        "and I already chose one between %s and %s !\n".formatted(numberLow, numberHigh) +
+                                        "I dare your guess it right! *grrr*\n\n" +
+                                        "Give it a shot: ", 20, false);
 
         while (!USER_INPUT.hasNextInt()) {
             USER_INPUT.next(); // IMPORTANT! Flush input stream. Breaks program if removed.
-            animateOutput("Ups! That's not a number. Try again: ", 20, false);
+            GameUtils.animateOutput("Ups! That's not a number. Try again: ", 20, false);
         }
         int usersNumber = USER_INPUT.nextInt();
 
         if (javagotchisNumber == usersNumber) {
             int coinsEarned = RANDOM.nextInt(20, 61);
             coins += coinsEarned;
-            animateOutput("\n* * * * * MEGA CONGRATS!!! * * * * *\n", 20, true);
-            animateOutput("You've just earned %s coins!".formatted(coinsEarned), 20, true);
+            GameUtils.animateOutput("\n* * * * * MEGA CONGRATS!!! * * * * *\n", 20, true);
+            GameUtils.animateOutput("You've just earned %s coins!".formatted(coinsEarned), 20, true);
         }
         else {
-            animateOutput("\nNO NO NO! Didn't see the %s?...\n".formatted(javagotchisNumber), 20, true);
-            animateOutput("Well, good luck next time... ;3", 20, true);
+            GameUtils.animateOutput("\nNO NO NO! Didn't see the %s?...\n".formatted(javagotchisNumber), 20, true);
+            GameUtils.animateOutput("Well, good luck next time... ;3", 20, true);
         }
 
         hungerLevel++;
@@ -307,17 +259,17 @@ public class Javagotchi {
 
     public void changeName() {
         do{
-            animateOutput("Oh, I am sooo excited. What's my name gonna be?: ", 20, false);
+            GameUtils.animateOutput("Oh, I am sooo excited. What's my name gonna be?: ", 20, false);
             name = USER_INPUT.nextLine();
         }
         while (name.isEmpty());
 
-        animateOutput("\n\nSuch a wonderful choice. I am sooo happy! :3", 20, true);
+        GameUtils.animateOutput("\n\nSuch a wonderful choice. I am sooo happy! :3", 20, true);
     }
 
     public void feed() {
         if (hungerLevel <= HungerLevel.MIN.getValue()+1) {
-            animateOutput("I'm not hungry right now! :3", 20, true);
+            GameUtils.animateOutput("I'm not hungry right now! :3", 20, true);
             return;
         }
 
@@ -336,23 +288,23 @@ public class Javagotchi {
         }
 
         for (int i = 0; i < rndNum; i++) {
-            animateOutput("*munch* ", 20, true);
+            GameUtils.animateOutput("*munch* ", 20, true);
             hungerLevel--;
         }
-        animateOutput("\n\nYUMMY YUMMY YUMMY!! :3", 20 ,true);
+        GameUtils.animateOutput("\n\nYUMMY YUMMY YUMMY!! :3", 20 ,true);
 
         hasEaten = true;
     }
 
     public void sleep() {
         if (tiredness < Tiredness.LOW.getValue()) {
-            animateOutput("I'm not sleepy right now! :3", 20, true);
+            GameUtils.animateOutput("I'm not sleepy right now! :3", 20, true);
             return;
         }
 
-        animateOutput("sleeping ", 20, false);
-        animateOutput("zZzZzZzZzZzZ\n\n", 400, false);
-        animateOutput("Oh wow! Now I'm full of energy! Let's goooo! :3", 20, true);
+        GameUtils.animateOutput("sleeping ", 20, false);
+        GameUtils.animateOutput("zZzZzZzZzZzZ\n\n", 400, false);
+        GameUtils.animateOutput("Oh wow! Now I'm full of energy! Let's goooo! :3", 20, true);
 
         tiredness = Tiredness.MIN.getValue();
         hasSlept = true;
@@ -361,34 +313,34 @@ public class Javagotchi {
     public void die() {
         if (hungerLevel > HungerLevel.MAX.getValue() && tiredness > Tiredness.MAX.getValue()) {
             System.out.println(BODY_HUNGRY_DEAD);
-            animateOutput("Wow... ", 20, true);
+            GameUtils.animateOutput("Wow... ", 20, true);
             System.out.print("\n");
-            animateOutput("You have not only managed to let me starve, but also deprived me of sleep... :(", 20, true);
+            GameUtils.animateOutput("You have not only managed to let me starve, but also deprived me of sleep... :(", 20, true);
         }
         else if (hungerLevel > HungerLevel.MAX.getValue()) {
             System.out.println(BODY_HUNGRY_DEAD);
             for (int i = 0; i < 3; i++) {
-                animateOutput("Why... ", 20, true);
+                GameUtils.animateOutput("Why... ", 20, true);
             }
             System.out.print("\n");
-            animateOutput("Why haven't you feed me... :(", 20, true);
+            GameUtils.animateOutput("Why haven't you feed me... :(", 20, true);
         }
         else {
             System.out.println(BODY_DEAD);
             for (int i = 0; i < 3; i++) {
-                animateOutput("Why... ", 20, true);
+                GameUtils.animateOutput("Why... ", 20, true);
             }
             System.out.print("\n");
-            animateOutput("Why wasn't I allowed to sleep... :(", 20, true);
+            GameUtils.animateOutput("Why wasn't I allowed to sleep... :(", 20, true);
         }
     }
 
     public void goodbye() {
-        animateOutput("Thanks for playing. Bye bye! :3", 20, true);
+        GameUtils.animateOutput("Thanks for playing. Bye bye! :3", 20, true);
     }
 
     public void invalidInput() {
-        animateOutput("I don't understand you... Sorry... :(", 20, true);
+        GameUtils.animateOutput("I don't understand you... Sorry... :(", 20, true);
     }
 
 }
