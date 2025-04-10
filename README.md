@@ -47,6 +47,9 @@ Daniel D
 
 ## <b>Version History</b>
 
+* 0.3.0.0
+    * This is a completely new game compared to the previous release
+
 * 0.2.0.0
     * Added mini-game "Guess the Color"
     * Cosmetic improvements
