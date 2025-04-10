@@ -10,8 +10,7 @@ public class Game {
     private static final StartMenu START_MENU = new StartMenu();
 
     private static void gameLoop() {
-        //SPLASH_SCREEN.display();
-        System.out.println("[DEBUG] Splash Screen Disabled");
+        SPLASH_SCREEN.display();
         GameMode gameMode;
         while (true) {
             START_MENU.display();
