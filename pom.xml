@@ -6,20 +6,20 @@
 
     <groupId>com.danield</groupId>
     <artifactId>Javagotchi</artifactId>
-    <version>0.2.0.0</version>
+    <version>0.3.0.0</version>
     <name>Javagotchi</name>
     <packaging>jar</packaging>
     <inceptionYear>2025</inceptionYear> <!-- required by launch4j -->
     <organization><name>-</name></organization> <!-- required by launch4j -->
 
     <description>
-        This school project is a small Tamagotchi-like game.
+        This school project is not a small Tamagotchi-like game anymore.
     </description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.jdk.version>21</project.jdk.version>
-        <mainClass>com.danield.javagotchi.Main</mainClass>
+        <mainClass>com.danield.javagotchi.base.Main</mainClass>
     </properties>
 
     <build>

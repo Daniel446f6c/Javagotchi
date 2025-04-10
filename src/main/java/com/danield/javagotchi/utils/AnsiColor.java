@@ -1,4 +1,4 @@
-package com.danield.javagotchi;
+package com.danield.javagotchi.utils;
 
 public enum AnsiColor {
     RESET("\u001B[0m", "RESET"),

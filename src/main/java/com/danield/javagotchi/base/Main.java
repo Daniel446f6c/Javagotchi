@@ -1,4 +1,4 @@
-package com.danield.javagotchi;
+package com.danield.javagotchi.base;
 
 public class Main {
     public static void main(String[] args) {

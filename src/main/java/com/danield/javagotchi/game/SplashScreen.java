@@ -1,8 +1,24 @@
-package com.danield.javagotchi;
+package com.danield.javagotchi.game;
+
+import com.danield.javagotchi.utils.AnsiColor;
+import com.danield.javagotchi.utils.GameUtils;
 
 public class SplashScreen implements Displayable {
 
     private final String SPLASH_IMAGE;
+
+    private void splash() {
+        for (int i = 0; i < 6; i++) {
+            for (AnsiColor color : AnsiColor.values()) {
+                if (color.equals(AnsiColor.RESET)) continue;
+                GameUtils.clearConsole();
+                System.out.print(color.getCode() + SPLASH_IMAGE);
+                try {
+                    Thread.sleep(120);
+                } catch (InterruptedException ignored) {}
+            }
+        }
+    }
 
     public SplashScreen() {
         SPLASH_IMAGE = """
@@ -35,19 +51,6 @@ public class SplashScreen implements Displayable {
                 ▒▒▒▒▒▒▒█▒▒▒▒▒▒▒▒▒▄▒▒▒▒▄▀▒▒▒█░░▀▄                                                                ▀█▄░░░░░░░░▀▄░░██▀░▀
                 ▒▒▒▒▒▒▒▒▀▄▒▒▒▒▒▒▒▒▀▀▀▀▒▒▒▄▀                                                                        ▀▀▄▄▄▄▄▄▄█▀█░░▀▄▀
                 """;
-    }
-
-    private void splash() {
-        for (int i = 0; i < 6; i++) {
-            for (AnsiColor color : AnsiColor.values()) {
-                if (color.equals(AnsiColor.RESET)) continue;
-                GameUtils.clearConsole();
-                System.out.print(color.getCode() + SPLASH_IMAGE);
-                try {
-                    Thread.sleep(120);
-                } catch (InterruptedException ignored) {}
-            }
-        }
     }
 
     @Override
