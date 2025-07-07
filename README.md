@@ -1,5 +1,7 @@
 # <b>Javagotchi</b>
 
+[![Java CI with Maven](https://github.com/Daniel446f6c/Javagotchi/actions/workflows/maven.yml/badge.svg)](https://github.com/Daniel446f6c/Javagotchi/actions/workflows/maven.yml)
+
 ## <b>Description</b>
 
 A small Tamagotchi-like game.</br>
